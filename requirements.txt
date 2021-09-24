@@ -1,0 +1,21 @@
+aiohttp==3.7.4.post0
+astunparse==1.6.3
+async-timeout==3.0.1
+attrs==21.2.0
+braceexpand==0.1.7
+chardet==4.0.0
+click==8.0.1
+cog-reloader==0.0.2
+colorama==0.4.4
+discord-custom-help==0.0.6
+discord.py==1.7.3
+dismusic==1.0.1
+idna==3.2
+import-expression==1.1.4
+jishaku==2.3.0
+multidict==5.1.0
+python-dotenv==0.19.0
+six==1.16.0
+typing-extensions==3.10.0.2
+wavelink @ git+https://github.com/shahriyardx/Wavelink@fa5d17faf7947769a8b1c18467a62990eae2672c
+yarl==1.6.3
