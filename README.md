@@ -13,7 +13,7 @@ A discord music bot with advanced features
     - `git clone https://github.com/shahriyardx/discord-music`
 - Install requirements
     - `pip install -r requirements.txt`
-- Edit `.env.example` file to `.env` and replace `TOKEN`
+- Edit `.env.example` file to `.env` and replace `TOKEN` and `PREFIX`
 - Run the bot
     - `python bot.py`
 
