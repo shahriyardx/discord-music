@@ -65,8 +65,8 @@ bot.load_extension("cogs.events")
 bot.load_extension("cogs.help")
 bot.load_extension("cogs.error_handler")
 
-bot.load_extension("jishaku") # uncomment this if you want to debug
-bot.load_extension("cog_reloader") # Uncomment this if you want to hot reload extensions whenever they get editted
+#bot.load_extension("jishaku") # uncomment this if you want to debug
+#bot.load_extension("cog_reloader") # Uncomment this if you want to hot reload extensions whenever they get editted
 
 TOKEN = os.getenv("TOKEN")
 bot.run(TOKEN)
