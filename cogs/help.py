@@ -23,7 +23,7 @@ class HelpCog(commands.HelpCommand):
 
     async def send_cog_help(self, cog):
         ctx = self.context
-        pre = ctx.clean_prefix
+        pre = self.clean_prefix
 
         embed = discord.Embed(
             color=self.color, timestamp=ctx.message.created_at, description=""
