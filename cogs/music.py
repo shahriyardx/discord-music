@@ -208,6 +208,7 @@ class Music(commands.Cog):
             return await ctx.send("Volume can't greater than 100")
 
         await player.set_volume(vol)
+        await ctx.send(f"Volume set to {vol}")
 
     @commands.command()
     @voice_connected()
