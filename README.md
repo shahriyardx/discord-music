@@ -16,3 +16,14 @@ A discord music bot with advanced features
 - Edit `.env.example` file to `.env` and replace `TOKEN`
 - Run the bot
     - `python bot.py`
+
+
+## Free nodes
+```txt
+host        : 52.52.235.172
+port        : 2333
+rest_uri    : http://52.52.235.172:2333
+password    : youshallnotpass
+identifier  : MAIN
+region      : singapore
+```
