@@ -34,9 +34,9 @@ class MusicBot(commands.AutoShardedBot):
         await self.wait_until_ready()
 
         await self.wavelink.initiate_node(
-            host="localhost",
+            host="52.52.235.172",
             port=2333,
-            rest_uri="http://localhost:2333",
+            rest_uri="http://52.52.235.172:2333",
             password="youshallnotpass",
             identifier="MAIN",
             region="singapore",
@@ -57,15 +57,16 @@ class MusicBot(commands.AutoShardedBot):
 intents = Intents.default()
 intents.members = True
 
-bot = MusicBot(command_prefix="..", intents=intents)
+PREFIX = os.getenv("PREFIX")
+bot = MusicBot(command_prefix=PREFIX, intents=intents)
 
 bot.load_extension("cogs.music")
 bot.load_extension("cogs.events")
 bot.load_extension("cogs.help")
 bot.load_extension("cogs.error_handler")
 
-# bot.load_extension("jishaku") # uncomment this if you want to debug
-# bot.load_extension("cog_reloader") # Uncomment this if you want to hot reload extensions whenever they get editted
+bot.load_extension("jishaku") # uncomment this if you want to debug
+bot.load_extension("cog_reloader") # Uncomment this if you want to hot reload extensions whenever they get editted
 
 TOKEN = os.getenv("TOKEN")
 bot.run(TOKEN)
