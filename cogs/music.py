@@ -418,7 +418,7 @@ class Music(commands.Cog):
             await asyncio.sleep(1)
             while True:
                 reaction, reaction_user = await self.bot.wait_for(
-                    "reaction_add", timeout=60.0
+                    "reaction_add", timeout=180
                 )
 
                 if reaction.emoji == "◀️":
