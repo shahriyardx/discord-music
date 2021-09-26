@@ -1,4 +1,8 @@
+import asyncio
+from os import replace
 import re
+import aiohttp
+from aiohttp.helpers import current_task
 import discord
 import wavelink
 from essentials.player import WebPlayer
@@ -351,6 +355,95 @@ class Music(commands.Cog):
             )
 
             await msg.edit(embed=embed)
+
+    @commands.command(aliases=["lyric"])
+    async def lyrics(self, ctx, query: str = None):
+        """Search lyrics"""
+        if not query:
+            player: WebPlayer = self.bot.wavelink.get_player(
+                ctx.guild.id, cls=WebPlayer
+            )
+            if not player.is_playing:
+                return await ctx.send(
+                    "Nothing is playing. Either play a song to see its lyrics or type a song name while using this command"
+                )
+
+            title = player.current.title
+
+        else:
+            title = query
+
+        async with aiohttp.ClientSession() as session:
+            async with session.get(
+                f"https://some-random-api.ml/lyrics?title={title}"
+            ) as response:
+                song_data = await response.json()
+                if song_data:
+                    lyrics = song_data["lyrics"]
+
+        lines = [line.replace("\n", "") for line in lyrics.split("\n")]
+        pages = []
+
+        stack = ""
+        for line in lines:
+            new_stack = stack + line + "\n"
+            if len(new_stack) > 300:
+                pages.append(stack)
+                stack = ""
+            stack += line + "\n"
+
+        if not pages:
+            pages.append(stack)
+
+        embed = discord.Embed(title=f"{song_data['author']}/{song_data['title']}")
+        embed.description = pages[0]
+        try:
+            embed.set_thumbnail(url=song_data["thumbnail"]["genius"])
+        except:
+            pass
+
+        if len(pages) == 1:
+            return await ctx.send(embed=embed)
+
+        else:
+            current_page = 0
+            embed.set_footer(text=f"{current_page + 1}/{len(pages)}")
+
+            book: discord.Message = await ctx.send(embed=embed)
+            buttons = ["◀️", "▶️"]
+
+            for emoji in buttons:
+                await book.add_reaction(emoji)
+
+            await asyncio.sleep(1)
+            while True:
+                reaction, reaction_user = await self.bot.wait_for(
+                    "reaction_add", timeout=60.0
+                )
+
+                if reaction.emoji == "◀️":
+                    current_page -= 1
+                    if current_page < 0:
+                        current_page = 0
+                        continue
+
+                elif reaction.emoji == "▶️":
+                    current_page += 1
+
+                try:
+                    await book.remove_reaction(reaction.emoji, reaction_user)
+                except:
+                    pass
+
+                try:
+                    content = pages[current_page]
+                except:
+                    current_page -= 1
+                    continue
+
+                embed.description = content
+                embed.set_footer(text=f"{current_page + 1}/{len(pages)}")
+                await book.edit(embed=embed)
 
 
 def setup(bot):
