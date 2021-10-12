@@ -19,4 +19,7 @@ A discord music bot with advanced features
 
 
 ## Downloads
-- Java 13 [Download](https://download.java.net/openjdk/jdk13/ri/openjdk-13+33_linux-x64_bin.tar.gz)
+- Java 13 
+    - Linux [Download](https://download.java.net/openjdk/jdk13/ri/openjdk-13+33_linux-x64_bin.tar.gz)
+    - Windows [Download](https://download.java.net/openjdk/jdk13/ri/openjdk-13+33_windows-x64_bin.zip)
+
