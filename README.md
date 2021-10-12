@@ -16,3 +16,7 @@ A discord music bot with advanced features
 - Edit `.env.example` file to `.env` and replace `TOKEN` and `PREFIX`
 - Run the bot
     - `python bot.py`
+
+
+## Downloads
+- Java 13 [Download](https://download.java.net/openjdk/jdk13/ri/openjdk-13+33_linux-x64_bin.tar.gz)
